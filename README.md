@@ -39,10 +39,9 @@ Each folder/file focuses on **one topic only**, so you can jump straight to what
 ```
 Java8Features/
 │
-├── LambdaExpressions.md
-├── FunctionalInterfaces.md
-├── StreamAPI.md
-├── MethodReferences.md
+├── FunctionalInterfaces
+├── Stream
+├── MethodReferences
 └── README.md
 ```
 
