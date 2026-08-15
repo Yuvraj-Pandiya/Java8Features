@@ -158,6 +158,7 @@ Collectors.partitioningBy()
 */
 import java.util.*;
 import java.util.stream.*;
+import java.util.function.*;
 class Beginner{
 	public void evenNumbers()
 	{
@@ -618,6 +619,99 @@ class Employee{
 		System.out.println(li);
 	}
 }
+class Advanced{
+	public Advanced(){}
+	
+	public void secondLargest()
+	{
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(2);
+		li.add(3);
+		li.add(4);
+		li.add(5);
+		
+		int ans = li.stream().sorted(Comparator.reverseOrder()).distinct().skip(1).findFirst().orElse(-1);
+		System.out.println(ans);
+	}
+	public void nthLargest(int n)
+	{
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(2);
+		li.add(3);
+		li.add(3);
+		li.add(4);
+		li.add(5);
+		li.add(5);
+		
+		int ans = li.stream()
+		.distinct()
+		.sorted(Comparator.reverseOrder())
+		.skip(n-1)
+		.findFirst()
+		.orElse(-1);
+		System.out.println(ans);
+	}
+	public void freqOfAll()
+	{
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(2);
+		li.add(3);
+		li.add(3);
+		li.add(4);
+		li.add(5);
+		li.add(5);
+		
+		Map<Integer,Long> map = li
+		.stream().
+		collect(Collectors.groupingBy(
+		Function.identity(),
+		Collectors.counting()
+		));
+		System.out.println(map);
+	}
+	
+	public void duplicate()
+	{
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(2);
+		li.add(3);
+		li.add(3);
+		li.add(4);
+		li.add(5);
+		li.add(5);
+		
+		Set<Integer> uniqueItems = new HashSet<>();
+		List<Integer> duplicates = li.stream()
+        .filter(n -> !uniqueItems.add(n)) // Keeps 'n' if it already exists in the set
+        .distinct()                       // Ensures the output only lists each duplicate once
+        .collect(Collectors.toList());
+		System.out.println(duplicates);
+	}
+	
+	public void uniqueElements()
+	{
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(2);
+		li.add(3);
+		li.add(3);
+		li.add(4);
+		li.add(5);
+		li.add(5);
+		
+		Set<Integer> uniqueItems = new HashSet<>(li);
+		System.out.println(uniqueItems);
+		//Preserve Order
+		Set<Integer> unique = new LinkedHashSet<>(li);
+		System.out.println(unique);
+		List<Integer> u = li.stream().distinct().collect(Collectors.toList());
+		System.out.println(u);
+	}
+}
 class StreamDemoQues
 {
 	public static void main(String[] args){
@@ -727,5 +821,38 @@ class StreamDemoQues
 		e1.duplicateEmployeeName();
         // 17.Convert List<Employee> → List<String>
 		e1.convertEmpListToListString();
+		
+		//Advanced Questions
+		Advanced ad = new Advanced();
+		// 1.Second Largest Number ⭐⭐⭐⭐⭐
+		ad.secondLargest();
+        // 2.Second Smallest Number (same only change the sorting order)
+		// 3.Nth Largest Number
+		ad.nthLargest(1);
+		ad.nthLargest(2);
+		ad.nthLargest(3);
+		ad.nthLargest(4);
+		// 4.Frequency of every element ⭐⭐⭐⭐⭐
+		ad.freqOfAll();
+		// 5.Duplicate Elements ⭐⭐⭐⭐⭐
+		ad.duplicate();
+        // 6.Unique Elements
+		ad.uniqueElements();
+		/*
+Missing Number
+Sum of Digits
+Largest Digit
+Prime Numbers
+Perfect Numbers
+Armstrong Numbers
+Fibonacci using Streams
+Factorial
+Merge two Lists
+Common Elements of two Lists ⭐⭐⭐⭐⭐
+Union of Lists
+Intersection of Lists
+Remove Null Values
+Remove Negative Numbers
+		*/
 	}
 }
